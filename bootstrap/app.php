@@ -33,7 +33,7 @@ class_alias('Collective\Html\FormFacade', 'Form');
 
 $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
