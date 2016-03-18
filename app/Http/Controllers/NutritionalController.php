@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Nutritional;
 use DB;
+use Illuminate\Http\Request;
 class NutritionalController extends Controller
 {
 
@@ -11,7 +12,14 @@ class NutritionalController extends Controller
         $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
         if($user!=null)
         {
-            $nutri=Nutritional::create($request->all());
+            $nutri=new Nutritional();
+            $nutri->user_id=$user[0]->id;
+            $nutri->recipe_id=$request->input('recipe_id');
+            $nutri->nutrient=$request->input('nutrient');
+            $nutri->amount=$request->input('amount');
+            $nutri->dri_dv=$request->input('dri_dv');
+            $nutri->save();
+
             return response()->json($nutri);
         }
         else{

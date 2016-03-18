@@ -1,29 +1,96 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use App\Recipe;
 use App\User;
+use App\Ingredients;
+use App\Nutritional;
+use App\Directions;
 use DB;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $recip=DB::select("select * from recipe");
-        $ingredients=null;
-        for($i=0;$i>count($recip);$i++)
-        {
 
-            $directions     =DB::select("select * from directions WHERE  recipe_id='$recip[$i]->id'");
-            $nutritional    =DB::select("select * from nutritional WHERE recipe_id='$recip[$i]->id'");
+    public function save(Request $request)
+    {
+        $token=null;
+        $details= User::orderBy('id', 'DESC')->first();
+        if($details!=null)
+        {
+            $id=$details->id;
+            $nextToken=$id+1;
+            $token='vf7B1fg'.$nextToken.'zYA9NZA';
+        }
+        else{
+            $token='vf7B1fgzYA9NZA';
+        }
+
+        $user=new User();
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
+        $user->password=$request->input('password');
+        $user->token=$token;
+        $user->save();
+
+        return redirect('user');
+    }
+
+    public function login()
+    {
+        return view('Home.login');
+    }
+
+    public function log(Request $request)
+    {
+        $email=$request->Input('email');
+        $password=$request->Input('password');
+        $status=User::where('email','=',$email)->where('password','=',$password)->first();
+        if($status!=null)
+        {
+            session_start();
+
+            $_SESSION['userid'] = $status->id;
+            $_SESSION['token'] = $status->token;
+            return redirect('user');
 
         }
-        $ingredients    =DB::select("select * from ingredients where recipe_id='$recip[0]->id'");
+        else{
+            return redirect('/');
+        }
+    }
+    public function index()
+    {
+        session_start();
+        if (isset($_SESSION['userid']))
+        {
+            $id = $_SESSION['userid'];
+            $user=User::where('id','=',$id)->first();
+            $recip=Recipe::where('user_id','=',$id)->get()->all();
+            $directions=Directions::where('user_id','=',$id)->get()->all();
+            $nutritional=Nutritional::where('user_id','=',$id)->get()->all();
+            $ingredients=Ingredients::where('user_id','=',$id)->get()->all();
 
-//        return view('Home.User');
-//        return view('Home.User', ['r'=>$recip],['i'=>$ingredients],['d'=>$directions],['n'=>$nutritional]);
+            return view('Home.User', ['re'=>$recip,'in'=>$ingredients,'di'=>$directions,'nu'=>$nutritional,'us'=>$user]);
+        }
+        else{
+            return redirect('user/login');
+        }
 
-        return $recip[1]->id;
-       // return  ['r'=>$ingredients];
-       // return [$recip,$ingredients,$directions,$nutritional];
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+        return redirect('/');
+    }
+
+    public function form()
+    {
+        session_start();
+        $id = $_SESSION['userid'];
+        $user=User::where('id','=',$id)->first();
+        return view('Home.form',['us'=>$user]);
     }
 }

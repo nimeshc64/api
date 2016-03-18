@@ -9,6 +9,9 @@
         body{
             font-family: 'Catamaran', sans-serif;
         }
+        .button{
+            font-size: 15px;;
+        }
     </style>
     <div class="wrapper">
         <nav>
@@ -19,7 +22,7 @@
 
             <div class="pull-right">
                 <a href="user" class="success  button">My Console</a>
-                <a href="about.html" class="secondary  button">LogIn</a>
+                <a href="user/logout" class="secondary  button">LogOut</a>
                 {{--<a href="http://frittt.com/free-documentation-html-template-docweb" target="_blank" class="btn btn-download"><img src="img/download.png" width="25" alt="Download Free Documentation Template" /> Download Now</a>--}}
             </div>
 

@@ -16,7 +16,11 @@ class RecipeController extends Controller
         $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
         if($user!=null)
         {
-            $recip=Recipe::create($request->all());
+            $recip=new Recipe();
+            $recip->title=$request->input('title');
+            $recip->country=$request->input('country');
+            $recip->user_id=$user[0]->id;
+            $recip->save();
             return response()->json($recip);
         }
         else{

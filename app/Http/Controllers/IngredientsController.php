@@ -13,7 +13,14 @@ class IngredientsController extends Controller
         $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
         if($user!=null)
         {
-            $ingre=Ingredients::create($request->all());
+            $ingre=new Ingredients();
+            $ingre->user_id=$user[0]->id;
+            $ingre->recipe_id=$request->input('recipe_id');
+            $ingre->name=$request->input('name');
+            $ingre->unit=$request->input('unit');
+            $ingre->qty=$request->input('qty');
+            $ingre->save();
+
             return response()->json($ingre);
         }
         else{

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Manage</title>
-    @include('Home.include.header')
+    {!! HTML::style('css/bootstrap.min.css')!!}
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -22,25 +22,28 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li class="active"><a href="../user">Current Data<span class="sr-only">(current)</span></a></li>
+                <li><a href="../user/addrecipe">Add More Recipes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <a href="#" class="btn btn-danger" role="button">LogOut</a>
+                <a href="../user/logout" class="btn btn-danger" role="button">LogOut</a>
 
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-
-
-<br><br><br>
+<br><br>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="alert alert-success" role="alert" style="text-align: center;">Api Key : <div style="color: black;">{{$us->token}}</div> </div>
+    </div>
+</div>
+<br><br>
 
 <div class="row">
-    <div class="col-sm-12 col-sm-offset-4">
-
-        <div class="panel panel-default">
-            <div class="panel-body">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div class="col-md-5 col-md-offset-1">
                 <h3>Recipe Data</h3>
                 <hr>
                 <table class="table table-hover">
@@ -52,14 +55,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
+                    @for($i=0;$i<count($re);$i++)
+                        <tr>
+                            <td>{{$re[$i]->id}}</td>
+                            <td>{{$re[$i]->title}}</td>
+                            <td>{{$re[$i]->country}}</td>
+                        </tr>
+                    @endfor
                     </tbody>
                 </table>
-
+            </div>
+            <div class="col-md-5">
                 <h3>Ingredients Data</h3>
                 <hr>
                 <table class="table table-hover">
@@ -73,17 +79,26 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @for($a=0;$a<count($in);$a++)
                     <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td>john@example.com</td>
-                        <td>john@example.com</td>
+                            <td>{{$in[$a]->id}}</td>
+                            <td>{{$in[$a]->recipe_id}}</td>
+                            <td>{{$in[$a]->name}}</td>
+                            <td>{{$in[$a]->unit}}</td>
+                            <td>{{$in[$a]->qty}}</td>
                     </tr>
-
+                    @endfor
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="row">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div class="col-md-5 col-md-offset-1">
                 <h3>Directions Data</h3>
                 <hr>
                 <table class="table table-hover">
@@ -95,15 +110,17 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @for($b=0;$b<count($di);$b++)
                     <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
+                            <td>{{$di[$b]->id}}</td>
+                            <td>{{$di[$b]->recipe_id}}</td>
+                            <td>{{$di[$b]->steps}}</td>
                     </tr>
-
+                    @endfor
                     </tbody>
                 </table>
-
+            </div>
+            <div class="col-md-5">
                 <h3>Nutritional Data</h3>
                 <hr>
                 <table class="table table-hover">
@@ -113,18 +130,19 @@
                         <th>Recipe_id</th>
                         <th>Nutrient</th>
                         <th>Amount</th>
-                        <th>Dri/Dv</th>
+                        <th>Dri/Dv(%)</th>
                     </tr>
                     </thead>
                     <tbody>
+                    @for($c=0;$c<count($nu);$c++)
                     <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                        <td>john@example.com</td>
-                        <td>john@example.com</td>
+                            <td>{{$nu[$c]->id}}</td>
+                            <td>{{$nu[$c]->recipe_id}}</td>
+                            <td>{{$nu[$c]->nutrient}}</td>
+                            <td>{{$nu[$c]->amount}}</td>
+                            <td>{{$nu[$c]->dri_dv}}</td>
                     </tr>
-
+                    @endfor
                     </tbody>
                 </table>
             </div>
@@ -132,24 +150,8 @@
     </div>
 </div>
 
-{{$i[0]->id}}
-{{--<div class="row">--}}
-    {{--<div class="col-md-12 col-md-offset-3">--}}
-        {{--<h2>Add Details</h2>--}}
-        {{--<form method="POST" action="api/recipe/create/dgdfsd">--}}
-            {{--<div class="form-group">--}}
-                {{--<label >Title</label>--}}
-                {{--<input type="text" class="form-control" name="title" placeholder="Title">--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-                {{--<label >Country</label>--}}
-                {{--<input type="text" class="form-control" name="country" placeholder="Password">--}}
-            {{--</div>--}}
+{!! HTML::script('js/vendor/jquery.min.js')!!}
+{!! HTML::script('js/bootstrap.min.js')!!}
 
-            {{--<button type="submit" class="btn btn-default">Submit</button>--}}
-        {{--</form>--}}
-    {{--</div>--}}
-{{--</div>--}}
-@include('Home.include.script')
 </body>
 </html></oc>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Directions;
 use DB;
+use Illuminate\Http\Request;
 class DirectionsController extends Controller
 {
     public function save(Request $request,$apiKey)
@@ -10,7 +11,11 @@ class DirectionsController extends Controller
         $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
         if($user!=null)
         {
-            $direc=Directions::create($request->all());
+            $direc=new Directions();
+            $direc->recipe_id=$request->input('recipe_id');
+            $direc->steps=$request->input('steps');
+            $direc->user_id=$user[0]->id;
+            $direc->save();
             return response()->json($direc);
         }
         else{

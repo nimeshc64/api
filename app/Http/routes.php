@@ -33,7 +33,11 @@ $app->get('nutritional',function(){
 
 //Users
 $app->get('user', 'UserController@index');
+$app->post('user/log','UserController@log');
+$app->get('user/login','UserController@login');
+$app->get('user/logout','UserController@logout');
 $app->post('user/create','UserController@save');
+$app->get('user/addrecipe','UserController@form');
 
 //recipe
 $app->post('api/recipe/create/{apiKey}','RecipeController@save');
