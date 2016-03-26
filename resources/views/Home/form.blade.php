@@ -22,12 +22,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="../user">Current Data<span class="sr-only">(current)</span></a></li>
-                <li><a href="../user/addrecipe">Add More Recipes</a></li>
+                <li ><a href="../user">Current Data<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="../user/addrecipe">Add More Recipes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <a href="../user/logout" class="btn btn-danger" role="button">LogOut</a>
-
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

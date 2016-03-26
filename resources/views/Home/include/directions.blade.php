@@ -146,23 +146,23 @@
 
     here's a simple recipe search:
     <pre class="prettyprint">&lt;script&gt;
-      	function getRecipeJson() {
-        var apiKey = "your-api-key-here";
-        var id = "1";
-        var url = "http://recipesoven.tk/api/directions/"
-                  + titleKeyword
-                  + "/apiKey="+apiKey;
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            cache: false,
-            url: url,
-            success: function (data) {
-                alert('success');
-                //console.log(data);
-            }
-        });
-    }
+        $(document).ready(function () {
+        var url="http://recipesoven.tk/api/";
+        var api_key="xxxxxxxxxx";
+        var ID=1;
+          $.ajax({
+              url: url+"directions/"+ID+"/"+api_key,
+              type: "GET",
+              success: function (e) {
+                  $.each(e, function (e, t) {
+                      alert('success');
+                  })
+              },
+              error: function (e) {
+                   alert('Error!');
+              }
+          })
+      })
 &lt;/script&gt;</pre>
 
     <hr>

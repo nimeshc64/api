@@ -125,8 +125,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav navbar-right">
-                <a href="user/logout" class="btn btn-danger" role="button">LogOut</a>
-
+                <?php
+                session_start();
+                if(!empty($_SESSION['userid'])) {
+                ?>
+                    <a href="../user/logout" class="btn btn-danger" role="button">LogOut</a>
+                <?php
+                }
+                ?>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -151,10 +157,10 @@
                         <div class="col-lg-12">
                             <form id="login-form" action="../user/log" method="post" role="form" style="display: block;">
                                 <div class="form-group">
-                                    <input  autocomplete="off" type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Username" value="" >
+                                    <input  autocomplete="off" type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" required="true" >
                                 </div>
                                 <div class="form-group">
-                                    <input autocomplete="off" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" >
+                                    <input autocomplete="off" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required="true">
                                 </div>
 
                                 <div class="form-group">
@@ -168,16 +174,16 @@
                             </form>
                             <form id="register-form" action="../user/create" method="post" role="form" style="display: none;">
                                 <div class="form-group">
-                                    <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Username" value="">
+                                    <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Username" value="" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" required="true">
                                 </div>
                                 <div class="form-group">
                                     <div class="row">

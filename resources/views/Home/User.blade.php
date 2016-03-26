@@ -26,8 +26,7 @@
                 <li><a href="../user/addrecipe">Add More Recipes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <a href="../user/logout" class="btn btn-danger" role="button">LogOut</a>
-
+                    <a href="../user/logout" class="btn btn-danger" role="button">LogOut</a>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -164,21 +164,42 @@
 
         here's a simple recipe search:
         <pre class="prettyprint">&lt;script&gt;
-      	function getRecipeJson() {
-        var title = "lasagna";
-        var url = "http://recipesoven.tk/api/recipe/"
-                  + title;
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            cache: false,
-            url: url,
-            success: function (data) {
-                alert('success');
-                //console.log(data);
-            }
-        });
-    }
+     $(document).ready(function () {
+        var url="http://recipesoven.tk/api/";
+        var api_key="xxxxxxxxxx";
+        var ID=1;
+          $.ajax({
+              url: url+"recipe/"+ID+"/"+api_key,
+              type: "GET",
+              success: function (e) {
+                  $.each(e, function (e, t) {
+                      alert('success');
+                  })
+              },
+              error: function (e) {
+                   alert('Error!');
+              }
+          })
+      })
+&lt;/script&gt;</pre>
+
+    <pre class="prettyprint">&lt;script&gt;
+     $(document).ready(function () {
+        var url="http://recipesoven.tk/api/";
+        var title="cake";
+          $.ajax({
+              url: url+"recipe/"+title,
+              type: "GET",
+              success: function (e) {
+                  $.each(e, function (e, t) {
+                      alert('success');
+                  })
+              },
+              error: function (e) {
+                   alert('Error!');
+              }
+          })
+      })
 &lt;/script&gt;</pre>
 
     <hr>

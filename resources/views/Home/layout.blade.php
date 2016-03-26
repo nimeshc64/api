@@ -20,10 +20,21 @@
                 <h1><a href="javascript:"><img src="img/icon.png" alt="Free Documentation Template Icon" /> <span style="font-size: .5em;">Documentation</span></a></h1>
             </div>
 
-            <div class="pull-right">
+            <div class="pull-right" style="padding-top:5px; padding-right: 5px;">
                 <a href="user" class="success  button">My Console</a>
-                <a href="user/logout" class="secondary  button">LogOut</a>
-                {{--<a href="http://frittt.com/free-documentation-html-template-docweb" target="_blank" class="btn btn-download"><img src="img/download.png" width="25" alt="Download Free Documentation Template" /> Download Now</a>--}}
+
+                <?php
+                session_start();
+                if(!empty($_SESSION['userid']))
+                {
+                    echo '<a href="../user/logout" class="button">LogOut</a>';
+                }
+                else
+                {
+                    echo '<a href="../user/login" class="button secondary">LogIn</a>';
+                }
+                ?>
+
             </div>
 
         </nav>

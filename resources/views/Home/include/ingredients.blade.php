@@ -167,23 +167,23 @@
 
     here's a simple recipe search:
     <pre class="prettyprint">&lt;script&gt;
-      	function getRecipeJson() {
-        var apiKey = "your-api-key-here";
-        var titleKeyword = "lasagna";
-        var url = "http://api.bigoven.com/recipes?pg=1&rpp=25&title_kw="
-                  + titleKeyword
-                  + "&api_key="+apiKey;
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            cache: false,
-            url: url,
-            success: function (data) {
-                alert('success');
-                //console.log(data);
-            }
-        });
-    }
+    $(document).ready(function () {
+        var url="http://recipesoven.tk/api/";
+        var api_key="xxxxxxxxxx";
+        var ID=1;
+          $.ajax({
+              url: url+"ingredients/"+ID+"/"+api_key,
+              type: "GET",
+              success: function (e) {
+                  $.each(e, function (e, t) {
+                      alert('success');
+                  })
+              },
+              error: function (e) {
+                   alert('Error!');
+              }
+          })
+      })
 &lt;/script&gt;</pre>
 
     <hr>
