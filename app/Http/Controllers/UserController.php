@@ -8,6 +8,7 @@ use App\Ingredients;
 use App\Nutritional;
 use App\Directions;
 use DB;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -26,10 +27,16 @@ class UserController extends Controller
             $token='vf7B1fgzYA9NZA';
         }
 
+        $this->validate($request, [
+            'password' => 'required',
+            'email' => 'required|email|unique:users'
+        ]);
+
         $user=new User();
         $user->name=$request->input('name');
         $user->email=$request->input('email');
-        $user->password=$request->input('password');
+//        $user->password=$request->input('password');
+        $user->password=Crypt::encrypt($request->input('password'));
         $user->token=$token;
         $user->save();
 
@@ -43,22 +50,25 @@ class UserController extends Controller
 
     public function log(Request $request)
     {
-        $email=$request->Input('email');
-        $password=$request->Input('password');
-        $status=User::where('email','=',$email)->where('password','=',$password)->first();
-        if($status!=null)
+        $user=User::where('email','=',$request->Input('email'))->first();
+        $decrypted = Crypt::decrypt($user->password);
+
+        //$email=$request->Input('email');
+        //$password=$request->Input('password');
+        //$status=User::where('email','=',$email)->where('password','=',$decrypted)->first();
+        if($decrypted==$request->Input('password'))
         {
             session_start();
 
-            $_SESSION['userid'] = $status->id;
-            $_SESSION['token'] = $status->token;
+            $_SESSION['userid'] = $user->id;
+            $_SESSION['token'] = $user->token;
             return redirect('user');
-
         }
         else{
             return redirect('/');
         }
     }
+
     public function index()
     {
         session_start();

@@ -78,12 +78,13 @@ class RecipeController extends Controller
 
     public function getByTitle($title)
     {
-        $recip = DB::select("SELECT r.title,r.country,i.name,i.unit,i.qty,d.steps,n.nutrient,n.amount,n.dri_dv
-                              FROM recipe r
-                              JOIN ingredients i ON r.id=i.id
-                              JOIN directions d ON i.id=d.id
-                              JOIN nutritional n ON d.id=n.id
-                              WHERE r.title='$title'");
+        $recip = DB::select("SELECT recipe.title,recipe.country,ingredients.name,ingredients.unit,ingredients.qty
+                                    ,directions.steps,nutritional.nutrient,nutritional.amount,nutritional.dri_dv
+                              FROM recipe
+                              JOIN ingredients  ON recipe.id=ingredients.id
+                              JOIN directions  ON ingredients.id=directions.id
+                              JOIN nutritional  ON directions.id=nutritional.id
+                              WHERE recipe.title='$title'");
 
         return response()->json($recip);
     }
