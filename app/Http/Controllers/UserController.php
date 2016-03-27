@@ -51,22 +51,26 @@ class UserController extends Controller
     public function log(Request $request)
     {
         $user=User::where('email','=',$request->Input('email'))->first();
-        $decrypted = Crypt::decrypt($user->password);
-
-        //$email=$request->Input('email');
-        //$password=$request->Input('password');
-        //$status=User::where('email','=',$email)->where('password','=',$decrypted)->first();
-        if($decrypted==$request->Input('password'))
+        if($user!=null)
         {
-            session_start();
+            $decrypted = Crypt::decrypt($user->password);
 
-            $_SESSION['userid'] = $user->id;
-            $_SESSION['token'] = $user->token;
-            return redirect('user');
+            if($decrypted==$request->Input('password'))
+            {
+                session_start();
+
+                $_SESSION['userid'] = $user->id;
+                $_SESSION['token'] = $user->token;
+                return redirect('user');
+            }
+            else{
+                return redirect('/');
+            }
         }
         else{
-            return redirect('/');
+            return redirect('../user/login/');
         }
+
     }
 
     public function index()
