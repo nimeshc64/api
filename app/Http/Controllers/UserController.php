@@ -105,6 +105,7 @@ class UserController extends Controller
         session_start();
         $id = $_SESSION['userid'];
         $user=User::where('id','=',$id)->first();
-        return view('Home.form',['us'=>$user]);
+        $recip_ids=DB::select("SELECT * FROM recipe WHERE user_id='$id'");
+        return view('Home.form',['us'=>$user],['ids'=>$recip_ids]);
     }
 }

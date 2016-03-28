@@ -21,17 +21,17 @@
             </div>
 
             <div class="pull-right" style="padding-top:5px; padding-right: 5px;">
-                <a href="user" class="success  button">My Console</a>
+                <a href="user" class="success  button"><i class="fa fa-cogs"></i> My Console</a>
 
                 <?php
                 session_start();
                 if(!empty($_SESSION['userid']))
                 {
-                    echo '<a href="../user/logout" class="button">LogOut</a>';
+                    echo '<a href="../user/logout" class="button"><i class="fa fa-sign-out"></i> LogOut</a>';
                 }
                 else
                 {
-                    echo '<a href="../user/login" class="button secondary">LogIn</a>';
+                    echo '<a href="../user/login" class="button secondary"><i class="fa fa-sign-in"></i> LogIn</a>';
                 }
                 ?>
 

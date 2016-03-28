@@ -81,12 +81,20 @@ class RecipeController extends Controller
         $recip = DB::select("SELECT recipe.title,recipe.country,ingredients.name,ingredients.unit,ingredients.qty
                                     ,directions.steps,nutritional.nutrient,nutritional.amount,nutritional.dri_dv
                               FROM recipe
-                              JOIN ingredients  ON recipe.id=ingredients.id
-                              JOIN directions  ON ingredients.id=directions.id
-                              JOIN nutritional  ON directions.id=nutritional.id
+                              LEFT OUTER JOIN ingredients  ON recipe.id=ingredients.id
+                              LEFT OUTER JOIN directions  ON ingredients.id=directions.id
+                              LEFT OUTER JOIN nutritional  ON directions.id=nutritional.id
                               WHERE recipe.title='$title'");
 
-        return response()->json($recip);
+        if($recip!=null)
+        {
+            return response()->json($recip);
+        }
+        else{
+            return response()->json(['Empty']);
+        }
+
+
     }
 
 }

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Login</title>
     {!! HTML::style('css/bootstrap.min.css')!!}
+    {!! HTML::style('css/font-awesome.min.css')!!}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 <style>
@@ -144,10 +146,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">Login</a>
+                            <a href="#" class="active" id="login-form-link"><i class="fa fa-sign-in"></i> Login</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="register-form-link">Register</a>
+                            <a href="#" id="register-form-link"><i class="fa fa-user-plus"></i> Register</a>
                         </div>
                     </div>
                     <hr>

@@ -11,3 +11,5 @@
 {!! HTML::style('css/prettify.css')!!}
 {!! HTML::style('css/foundation.min.css')!!}
 {!! HTML::style('css/bootstrap.min.css')!!}
+{!! HTML::style('css/font-awesome.min.css')!!}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">

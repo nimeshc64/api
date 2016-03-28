@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>User Manage</title>
     {!! HTML::style('css/bootstrap.min.css')!!}
+    {!! HTML::style('css/font-awesome.min.css')!!}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -22,11 +24,18 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ><a href="../user">Current Data<span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="../user/addrecipe">Add More Recipes</a></li>
+                <li><a href="../user"><i class="fa fa-level-down"></i> Current Data<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="../user/addrecipe"><i class="fa fa-plus-circle"></i> Add More Recipes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <a href="../user/logout" class="btn btn-danger" role="button">LogOut</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user fa-lg"> {{$us->name}}</i> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li ><a href="#"><b><i class="fa fa-envelope"></i> {{$us->email}}</b></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="../user/logout" style="text-align: center;"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -34,7 +43,7 @@
 <br><br>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <div class="alert alert-success" role="alert" style="text-align: center;">Api Key : <div style="color: black;">{{$us->token}}</div> </div>
+        <div class="alert alert-success" role="alert" style="text-align: center;"><i class="fa fa-key"></i> Api Key : <div style="color: black;">{{$us->token}}</div> </div>
     </div>
 </div>
 <br><br>
@@ -63,7 +72,11 @@
                 <form method="POST" action="../api/ingredients/create/{{$us->token}}">
                     <div class="form-group">
                         <label >Recipe Id</label>
-                        <input type="text" class="form-control" name="recipe_id" placeholder="Recipe ID">
+                        <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
+                            @foreach($ids as $id)
+                                <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label >Name</label>
@@ -94,11 +107,15 @@
                 <form method="POST" action="../api/directions/create/{{$us->token}}">
                     <div class="form-group">
                         <label >Recipe ID</label>
-                        <input type="text" class="form-control" name="recipe_id" placeholder="Recipe ID">
+                        <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
+                            @foreach($ids as $id)
+                                <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label >Steps</label>
-                        <input type="text" class="form-control" name="steps" placeholder="Steps">
+                        ​<textarea id="txtArea" name="steps" class="form-control" rows="7" cols="70"></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-success">Submit</button>
@@ -110,7 +127,11 @@
                 <form method="POST" action="../api/nutritional/create/{{$us->token}}">
                     <div class="form-group">
                         <label >Recipe Id</label>
-                        <input type="text" class="form-control" name="recipe_id" placeholder="Recipe Id">
+                        <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
+                            @foreach($ids as $id)
+                                <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label >Nutrient</label>
