@@ -20,11 +20,12 @@
 
     <h3 id="view_type">Recipes</h3>
 
-    <p> As they say: You cannot improve what you cannot measure; but the paradox is you
-        cannot measure everything – happiness, hatred, anger… but you can measure customer
-        satisfaction. Yes, you can measure customer satisfaction by analyzing likes and
-        dislikes of your customers. You can gauge popularity of your website or products.
-        You can also:</p>
+    <p>
+        The Recipe object refers to a recipe within the RecipesOven collection. The following methods are supported
+        for the Recipe object.
+
+        <p>Like all calls, you need to append ?api_key={your api key issued to you by Recipes Oven} to your call.</p>
+    </p>
 
     <table class="hover">
         <thead>
@@ -64,8 +65,8 @@
             <td>yes</td>
         </tr>
         <tr>
-            <td>country</td>
-            <td>Contry of Recip Own</td>
+            <td>Country</td>
+            <td>Country of Recipe Own</td>
             <td>yes</td>
         </tr>
         </tbody>
@@ -93,8 +94,8 @@
             <td>no</td>
         </tr>
         <tr>
-            <td>country</td>
-            <td>Contry of Recip Own</td>
+            <td>Country</td>
+            <td>Country of Recipe Own</td>
             <td>no</td>
         </tr>
         </tbody>
@@ -139,6 +140,7 @@
     </table>
 
     <h4>GET a Recipe By TITLE (HTTP GET)</h4>
+    <p>The following methods can use without api_key </p>
     <div class="callout code"><p>GET http://recipesoven.tk/api/recipe/{title}</p></div>
     <table class="hover">
         <thead>
@@ -158,11 +160,12 @@
     </table>
 
     <h4>Example</h4>
-        <p>Here's a sample call to /recipe/1. JSON format is shown. Be sure to set "Accept" and
-        "Content-Type" headers in your request to "application/json",
-        otherwise you'll get back XML.</p>
+        <p>Here's a sample call to /recipe/id=1. JSON format is shown. Be sure to set "Accept" and
+        "Content-Type" headers in your request to "application/json" </p>
 
         here's a simple recipe search:
+
+    <P>Get By ID</P>
         <pre class="prettyprint">&lt;script&gt;
      $(document).ready(function () {
         var url="http://recipesoven.tk/api/";
@@ -182,7 +185,7 @@
           })
       })
 &lt;/script&gt;</pre>
-
+<P>Get By Title</P>
     <pre class="prettyprint">&lt;script&gt;
      $(document).ready(function () {
         var url="http://recipesoven.tk/api/";

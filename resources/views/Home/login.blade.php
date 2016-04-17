@@ -110,6 +110,7 @@
     }
 
 </style>
+
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -139,6 +140,18 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<div>
+
+@if($error!=null)
+<div class="col-md-6 col-md-offset-3">
+    <div class="{{$alert}}" style="text-align: center;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {{$error}}
+    </div>
+</div>
+@endif
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3" style="margin-top: 50px;">
@@ -225,5 +238,11 @@
     });
 
 </script>
+<script>
+        $(function(){
+            $('div.alert').delay(4000).fadeOut(1000);
+        });
+</script>
+
 </body>
 </html>

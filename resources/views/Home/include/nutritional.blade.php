@@ -20,11 +20,9 @@
 
     <h3 id="view_type">Nutritional</h3>
 
-    <p> As they say: You cannot improve what you cannot measure; but the paradox is you
-        cannot measure everything – happiness, hatred, anger… but you can measure customer
-        satisfaction. Yes, you can measure customer satisfaction by analyzing likes and
-        dislikes of your customers. You can gauge popularity of your website or products.
-        You can also:</p>
+    <p>The Nutritional List object refers to the collection of Nutritional list items for a RecipesOven user.
+        The following methods are supported for the Nutritionals list object.
+    </p>
 
     <table class="hover">
         <thead>
@@ -160,9 +158,9 @@
 
 
     <h4>Example</h4>
-    <p>Here's a sample call to /recipe?rid=530115. JSON format is shown. Be sure to set "Accept" and
-        "Content-Type" headers in your request to "application/json",
-        otherwise you'll get back XML.</p>
+    <p>Here's a sample call to /Nutritional/id=5. JSON format is shown. Be sure to set "Accept" and
+        "Content-Type" headers in your request to "application/json"
+    </p>
 
     here's a simple recipe search:
     <pre class="prettyprint">&lt;script&gt;

@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use DB;
 use App\Recipe;
 use App\User;
-
+use Symfony\Component\HttpFoundation\Response;
 class RecipeController extends Controller
 {
 
     public function save(Request $request,$apiKey)
     {
 
-        $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
+        $user=$this->CheckUser($apiKey);
         if($user!=null)
         {
             $recip=new Recipe();
@@ -31,7 +31,7 @@ class RecipeController extends Controller
 
     public function update(Request $request,$id,$apiKey)
     {
-        $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
+        $user=$this->CheckUser($apiKey);
         if($user!=null)
         {
             $recip=Recipe::find($id);
@@ -49,7 +49,7 @@ class RecipeController extends Controller
 
     public function delete($id,$apiKey)
     {
-        $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
+        $user=$this->CheckUser($apiKey);
         if($user!=null)
         {
             $recip = Recipe::find($id);
@@ -64,7 +64,7 @@ class RecipeController extends Controller
 
     public function getById($id,$apiKey)
     {
-        $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
+        $user=$this->CheckUser($apiKey);
         if($user!=null) {
             $recip = Recipe::find($id);
 
@@ -73,7 +73,12 @@ class RecipeController extends Controller
         else{
             return response()->json(["Not validate API key"]);
         }
+    }
 
+    public function CheckUser($apiKey)
+    {
+        $user=DB::select("SELECT * FROM users WHERE token='$apiKey'");
+        return $user;
     }
 
     public function getByTitle($title)

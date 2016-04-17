@@ -4,25 +4,23 @@
     @include('Home.include.sidebar')
 @endsection
 @section('content')
-    <h2> Getting Started</h2>
-    <h3 id="welcome"> Introduction</h3>
-    <p> Are you listening to your customers?</p>
+    <h2 id="welcome"> Introduction</h2>
 
-    <p> As they say: You cannot improve what you cannot measure; but the paradox is you
-        cannot measure everything – happiness, hatred, anger… but you can measure customer
-        satisfaction. Yes, you can measure customer satisfaction by analyzing likes and
-        dislikes of your customers. You can gauge popularity of your website or products.
-        You can also:</p>
-    <ul>
-        <li>See how many visitors like the new design of your website or logo</li>
-        <li>Analyze what your readers want to see on your blog</li>
-        <li>Understand how helpful the content on your support forum or website is</li>
-        <li>Know the latest trends and user’s opinion before launching a new product or service</li>
-    </ul>
-    <p> Opineo allows you to do all of this and much more without signing up for an account
-        or hire an expert. This DIY tool enables you to listen to your customers’ voice
-        easily and instantly. All you have to do is go online, design your widget and place
-        it on your website. </p>
+    <p>Want to add great recipe content to your website, mobile/device application or home automation application?</p>
+    <p>
+        The recipesoven.tk Recipe API provides third-party websites and products with access
+        recipes and their related data .It's
+        all delivered by an easy to use interface that takes only minutes to learn.
+    </p>
+
+    <h3>Display Recipes</h3>
+    <p>Display recipes in detail,on your website or mobile application.</p>
+
+    <h3>Recipe Reviews</h3>
+    <p>Get recipe reviews, and detailed ingredient information.</p>
+
+    <h3>Recipes How you Want Them</h3>
+    <p>Support for JSON formats in an easy to use REST-based API.</p>
 
     <hr>
 @endsection

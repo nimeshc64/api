@@ -27,9 +27,15 @@ $app->get('directions',function(){
 $app->get('nutritional',function(){
     return view('Home.include.nutritional');
 });
+$app->get('authentication',function(){
+    return view('Home.include.authentication');
+});
+$app->get('serialization',function(){
+    return view('Home.include.serialization');
+});
 
 
-//-------------------------------------API Routes------------------------------
+//-------------------------------------API Routes User------------------------------
 
 //Users
 $app->get('user', 'UserController@index');
@@ -37,9 +43,23 @@ $app->post('user/create','UserController@save');
 $app->post('user/log','UserController@log');
 $app->get('user/login','UserController@login');
 $app->get('user/logout','UserController@logout');
-
+//User Admin
 $app->get('user/addrecipe','UserController@form');
+$app->get('user/updaterecipe','UserController@update');
+$app->get('user/deleterecipe','UserController@delete');
+$app->get('user/getDetials','UserController@getDetails');
+//update
+$app->post('updateRecip','UserController@updateRecip');
+$app->post('updateIngre','UserController@updateIngre');
+$app->post('updateDirec','UserController@updateDirec');
+$app->post('updateNut','UserController@updateNut');
+//Delete
+$app->post('deleteRecip','UserController@deleteRecip');
+$app->post('deleteIngre','UserController@deleteIngre');
+$app->post('deleteDirec','UserController@deleteDirec');
+$app->post('deleteNut','UserController@deleteNut');
 
+//=======================================================API Routes=======================================================
 //recipe
 $app->post('api/recipe/create/{apiKey}','RecipeController@save');
 $app->put('api/recipe/update/{id}/{apiKey}','RecipeController@update');

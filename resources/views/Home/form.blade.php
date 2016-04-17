@@ -26,6 +26,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="../user"><i class="fa fa-level-down"></i> Current Data<span class="sr-only">(current)</span></a></li>
                 <li class="active"><a href="../user/addrecipe"><i class="fa fa-plus-circle"></i> Add More Recipes</a></li>
+                <li ><a href="../user/updaterecipe"><i class="fa fa-upload"></i> Update Recipes</a></li>
+                <li><a href="../user/deleterecipe"><i class="fa fa-times"></i> Delete Recipes</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -40,119 +42,117 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<br><br>
+<br>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
         <div class="alert alert-success" role="alert" style="text-align: center;"><i class="fa fa-key"></i> Api Key : <div style="color: black;">{{$us->token}}</div> </div>
     </div>
 </div>
-<br><br>
+<br>
 
 <div class="row">
     <div class="panel panel-info">
         <div class="panel-body">
-            <div class="col-md-5 col-md-offset-1">
-                <h2>Add Recipe</h2>
-                <form method="POST" action="../api/recipe/create/{{$us->token}}">
-                    <div class="form-group">
-                        <label >Title</label>
-                        <input type="text" class="form-control" name="title" placeholder="Title">
-                    </div>
-                    <div class="form-group">
-                        <label >Country</label>
-                        <input type="text" class="form-control" name="country" placeholder="Country">
-                    </div>
 
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="reset" class="btn btn-danger">Clear</button>
-                </form>
-            </div>
-            <div class="col-md-5">
-                <h2>Add Ingredients</h2>
-                <form method="POST" action="../api/ingredients/create/{{$us->token}}">
-                    <div class="form-group">
-                        <label >Recipe Id</label>
-                        <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
-                            @foreach($ids as $id)
-                                <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label >Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <label >Unit</label>
-                        <input type="text" class="form-control" name="unit" placeholder="Unit">
-                    </div>
-                    <div class="form-group">
-                        <label >Qty</label>
-                        <input type="text" class="form-control" name="qty" placeholder="Qty">
-                    </div>
+            <div class="row">
+                <div class="col-sm-1 col-md-3" style="margin-left: 5px;">
+                    <h2>Add Recipe</h2>
+                    <form method="POST" action="../api/recipe/create/{{$us->token}}">
+                        <div class="form-group">
+                            <label >Title</label>
+                            <input type="text" class="form-control" name="title" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <label >Country</label>
+                            <input type="text" class="form-control" name="country" placeholder="Country">
+                        </div>
 
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="reset" class="btn btn-danger">Clear</button>
-                </form>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">Clear</button>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <h2>Add Ingredients</h2>
+                    <form method="POST" action="../api/ingredients/create/{{$us->token}}">
+                        <div class="form-group">
+                            <label >Recipe Id</label>
+                            <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
+                                @foreach($ids as $id)
+                                    <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label >Name</label>
+                            <input type="text" class="form-control" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label >Unit</label>
+                            <input type="text" class="form-control" name="unit" placeholder="Unit">
+                        </div>
+                        <div class="form-group">
+                            <label >Qty</label>
+                            <input type="text" class="form-control" name="qty" placeholder="Qty">
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">Clear</button>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <h2>Add Directions</h2>
+                    <form method="POST" action="../api/directions/create/{{$us->token}}">
+                        <div class="form-group">
+                            <label >Recipe ID</label>
+                            <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
+                                @foreach($ids as $id)
+                                    <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label >Steps</label>
+                            ​<textarea id="txtArea" name="steps" class="form-control" rows="7" cols="70"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">Clear</button>
+                    </form>
+                </div>
+                <div class="col-md-3" style="margin-left: -5px;">
+                    <h2>Add Nutritional</h2>
+                    <form method="POST" action="../api/nutritional/create/{{$us->token}}">
+                        <div class="form-group">
+                            <label >Recipe Id</label>
+                            <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
+                                @foreach($ids as $id)
+                                    <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label >Nutrient</label>
+                            <input type="text" class="form-control" name="nutrient" placeholder="Nutrient">
+                        </div>
+                        <div class="form-group">
+                            <label >Amount</label>
+                            <input type="text" class="form-control" name="amount" placeholder="Amount">
+                        </div>
+                        <div class="form-group">
+                            <label >Dri/Dv</label>
+                            <input type="text" class="form-control" name="dri_dv" placeholder="Dri/Dv">
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="reset" class="btn btn-danger">Clear</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="panel panel-info">
-        <div class="panel-body">
-            <div class="col-md-5 col-md-offset-1">
-                <h2>Add Directions</h2>
-                <form method="POST" action="../api/directions/create/{{$us->token}}">
-                    <div class="form-group">
-                        <label >Recipe ID</label>
-                        <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
-                            @foreach($ids as $id)
-                                <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label >Steps</label>
-                        ​<textarea id="txtArea" name="steps" class="form-control" rows="7" cols="70"></textarea>
-                    </div>
 
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="reset" class="btn btn-danger">Clear</button>
-                </form>
-            </div>
-            <div class="col-md-5">
-                <h2>Add Nutritional</h2>
-                <form method="POST" action="../api/nutritional/create/{{$us->token}}">
-                    <div class="form-group">
-                        <label >Recipe Id</label>
-                        <select id="recipe_id"  data-no-selected="Nothing selected" class="form-control" name="recipe_id">
-                            @foreach($ids as $id)
-                                <option value="{{ $id->id }}">{{ $id->id }} - {{$id->title}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label >Nutrient</label>
-                        <input type="text" class="form-control" name="nutrient" placeholder="Nutrient">
-                    </div>
-                    <div class="form-group">
-                        <label >Amount</label>
-                        <input type="text" class="form-control" name="amount" placeholder="Amount">
-                    </div>
-                    <div class="form-group">
-                        <label >Dri/Dv</label>
-                        <input type="text" class="form-control" name="dri_dv" placeholder="Dri/Dv">
-                    </div>
-
-                    <button type="submit" class="btn btn-success">Submit</button>
-                    <button type="reset" class="btn btn-danger">Clear</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 {!! HTML::script('js/vendor/jquery.min.js')!!}
