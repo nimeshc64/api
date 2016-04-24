@@ -17,5 +17,12 @@
 
     <p>The authentication process for this user-level part of the recipesOven API is based on the HTTP Basic Access
     Authentication method defined by RFC 1945 (Hypertext Transfer Protocol – HTTP/1.0).</p>
+
+    <div class="row">
+        <div class="col-sm-offset-4 col-md-4">
+            <a href="../user/login"><button class="button radius" style="text-align:center;"><i class="fa fa-key" aria-hidden="true"></i> Get API</button></a>
+        </div>
+    </div>
+
     <hr>
 @endsection
