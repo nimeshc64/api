@@ -40,7 +40,7 @@
         </nav>
         <header style="background-color:#ea6153";>
             <div class="container">
-                <h2 class="lone-header">Recipes Oven</h2>
+                    <h2 class="lone-header">Recipes Oven</h2>
             </div>
         </header>
 
@@ -51,6 +51,16 @@
                 <div class="docs-content">
                 @yield('content')
                 </div>
+
+                <?php
+                if(!empty($_SESSION['userid']))
+                {
+                    echo '<div class="pull-right" style="height: 10px;">
+                <h4>API KEY:<span class="label label-default">';echo $_SESSION['token'];'</span></h3>
+                </div>';
+                }
+                ?>
+
                {{--@include('Home.include.content')--}}
             </div>
         </section>
